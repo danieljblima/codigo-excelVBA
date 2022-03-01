@@ -1,0 +1,41 @@
+CADASTRO DE LOGIN E SENHA
+
+'//////// Módulo para cadastro de Usuário /////
+
+Sub CadastroUsuario()
+
+'//////// Setando e selecionando a worksheet pela variável w /////
+Set w = CadUsuario 
+    w.Select
+
+  '//////// Formatando textbox login e senha como obrigatório /////  
+If frmCadUsuario.txtUsuario.Value = "" Then
+    MsgBox "Nome do usuário obrigatório!", vbInformation, "Erro "
+    frmCadUsuario.txtUsuario.SetFocus
+    
+Exit Sub
+End If
+
+If frmCadUsuario.txtSenha.Value = "" Then
+    MsgBox "Senha obrigatório!", vbInformation, "Erro"
+    frmCadUsuario.txtSenha.SetFocus
+    
+Exit Sub
+End If
+
+'//////// Verificando ultima linha com preenchimento, descendo uma e selecionando /////  
+    Range("a1048576").End(xlUp).Offset(1, 0).Select
+
+'//////// Com a celula ativa rrealizando o registro das informações /////    
+
+With ActiveCell
+    .Value = frmCadUsuario.txtUsuario.Value
+    .Offset(0, 1) = frmCadUsuario.txtSenha.Value
+  
+End With
+
+'//////// Fechando e inicializando o formulário de cadastro de usuário  /////
+Unload frmCadUsuario
+frmCadUsuario.Show
+
+End Sub
